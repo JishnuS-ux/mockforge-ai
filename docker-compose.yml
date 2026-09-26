@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mockforge-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: mockforge-ai-service
+    ports:
+      - "5001:5001"
+    environment:
+      - PYTHON_SERVICE_PORT=5001
+    restart: always
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: mockforge-server
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - MONGODB_URI=mongodb://mongodb:27017/mockforge
+      - PYTHON_SERVICE_URL=http://ai-service:5001
+      - CLIENT_URL=http://localhost:5173
+    depends_on:
+      - mongodb
+      - ai-service
+    restart: always
+
+volumes:
+  mongo_data:

@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build outputs
+dist/
+client/dist/
+server/dist/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+client/.env
+client/.env.*
+server/.env
+server/.env.*
+ai-service/.env
+ai-service/.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logs
+*.log
+
+# Generated exports
+exports/*
+!exports/.gitkeep
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
