@@ -204,6 +204,6 @@ def preview():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PYTHON_SERVICE_PORT', 5001))
+    port = int(os.environ.get('PORT') or os.environ.get('PYTHON_SERVICE_PORT', 5001))
     print(f'🐍 MockForge Python Service running on http://localhost:{port}')
     app.run(host='0.0.0.0', port=port, debug=False)
